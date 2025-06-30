@@ -101,5 +101,31 @@
             <p>&copy; 2025 Your Name. All Rights Reserved.</p> </div>
     </footer>
 
+     <script>
+        // 1. スムーススクロールさせたい全てのリンクを取得
+        // href属性が「#」で始まる全てのaタグを選択
+        const smoothScrollLinks = document.querySelectorAll('a[href^="#"]');
+
+        // 2. 各リンクにクリックイベントを追加
+        smoothScrollLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                // 3. aタグのデフォルトの挙動（瞬時にジャンプする）をキャンセル
+                e.preventDefault();
+
+                // 4. リンク先（href属性）から、スクロール先の要素を取得
+                const href = link.getAttribute('href');
+                const targetElement = document.querySelector(href);
+
+                // 5. リンク先が存在すれば、そこまでスムーススクロールを実行
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>
